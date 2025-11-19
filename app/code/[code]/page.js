@@ -20,7 +20,7 @@ export default function StatsPage() {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch(`/api/links/code/${code}`);
+      const response = await fetch(`/api/links/${code}`);
       const result = await response.json();
 
       if (result.status === 'success') {
