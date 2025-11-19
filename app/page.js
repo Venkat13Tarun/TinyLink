@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 function trimUrl(url) {
   if (!url) return '';
@@ -8,6 +9,7 @@ function trimUrl(url) {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -270,6 +272,17 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="md:ml-6 mt-4 md:mt-0 flex gap-2">
+                      <button
+                        onClick={() => router.push(`/code/${link.customCode || link.id}`)}
+                        title="View stats"
+                        aria-label="View stats"
+                        className="transition bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 px-3 py-2 rounded-lg text-xs font-semibold shadow-sm flex items-center gap-1 hover:shadow active:scale-95"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Stats
+                      </button>
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(`${window.location.origin}/${link.customCode || link.id}`);
